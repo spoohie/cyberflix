@@ -14,6 +14,7 @@ module "video_converter_lambda" {
 
   environment_variables = {
     destination_bucket = aws_s3_bucket.output.bucket
+    mediaconvert_endpoint = ""
   }
 }
 
@@ -46,6 +47,11 @@ resource "aws_iam_policy" "video_converter" {
    "Version":"2012-10-17",
    "Statement":[
       {
+        "Effect": "Allow",
+        "Action": "mediaconvert:*",
+        "Resource": "*"
+      },
+      {
         "Effect":"Allow",
         "Action":[
             "s3:GetObject*",
@@ -62,8 +68,8 @@ resource "aws_iam_policy" "video_converter" {
             "s3:PutObject*",
         ],
         "Resource":[
-            "${aws_s3_bucket.destination.arn}",
-            "${aws_s3_bucket.destination.arn}/*"
+            "${aws_s3_bucket.output.arn}",
+            "${aws_s3_bucket.output.arn}/*"
         ]
       }
    ]
