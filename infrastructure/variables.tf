@@ -1,6 +1,6 @@
 variable "tags" {
   default = {
-        Name = "Faceblurer"
+        Name = "Cyberflix"
         Environment = "Dev"
         Version = "1.0"
     }
